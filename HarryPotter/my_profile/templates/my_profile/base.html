@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title> Hogwarts |
+        {% block title %}{% endblock title %}</title>
+    </head>
+    <body>
+    	<div align="right"> 
+         <p>Welcome, <a href="/my_profile"> {{ user.username }}</a>!</p>
+         <a href="/logout/">Logout</a> 
+      </div>
+
+        <h1>{% block head %}{% endblock head %}</h1>
+        {% block content %}{% endblock content %}
+ 
+    </body>
+</html>

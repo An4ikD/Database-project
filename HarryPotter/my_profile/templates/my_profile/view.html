@@ -1,0 +1,37 @@
+{% extends "my_profile/base.html" %}
+{% block title %}My profile{% endblock title %}
+
+{% block content %}
+   	<table border="1" width="100%">
+   		<tr>
+   			<th width="10%">Name: </th>
+            <td> User's name </td>
+   		</tr>
+   		<tr>
+   			<th>Surname: </th>
+            <td> User's surname </td>
+   		</tr>
+   		<tr>
+   			<th>House: </th>
+            <td> User's house (griffindor, slytherin, etc)</td>
+   		</tr>
+   		<tr>
+   			<th>Subjects: </th>
+            <td> List of user's subjects that he studies/teaches </td>
+   		</tr>
+   	</table>
+   <div align="center">
+   <a href="{% url 'my_profile:edit' %}">Edit my profile</a>
+   </div>
+   <div>
+   <a href="{% url 'my_profile:search_students' %}"> Search students </a>
+   </div>
+   <div>
+   <a href="{% url 'my_profile:search_staff' %}"> Search staff </a>
+   </div>
+   <div>
+   <a href="{% url 'my_profile:search_subjects' %}"> Search subjects </a>
+   </div>
+
+{% endblock content %}
+
