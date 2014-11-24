@@ -20,7 +20,6 @@ cursor = cnx.cursor()
 def my_profile(request, template_name):
 	params = {}
 	params['user'] = request.user
-	
 	return render(request, template_name, params)
 
 def edit(request, template_name, redirect_name):

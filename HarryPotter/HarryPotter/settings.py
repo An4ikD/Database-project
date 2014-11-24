@@ -117,4 +117,4 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
-LOGIN_URL = '/'
+LOGIN_URL = '/login/'

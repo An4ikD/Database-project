@@ -41,11 +41,27 @@
                 </a>
             </div>
             <div class="main_header_item item_rb float_right" align="center">
-                <a href="{% url 'login:login' %}">
-                    Login
-                    <span class="divlink"></span>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'login:sign_out' %}">
+                            Logout
+                            <span class="divlink"></span>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login:sign_in' %}">
+                            Login
+                            <span class="divlink"></span>
+                        </a>
+                    {% endif %}
                 </a>
             </div>
+            {% if user.is_authenticated %}
+                <div class="main_header_item float_right" align="center">
+                    <a href="{% url 'my_profile:my_profile' %}">
+                        {{ user.username }}
+                        <span class="divlink"></span>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
     
