@@ -1,0 +1,8 @@
+body, html {
+	padding:0px; margin:0px; font-size:14px;
+    background:url('../images/bg_girl.jpg') no-repeat top center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}

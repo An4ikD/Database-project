@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+        {% if title %}
+            {{title}}
+        {% else %}
+            Hogwarts
+        {% endif %}
+
+		{% block title %}
+		{% endblock title %}
+	</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main_header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gen.css' %}">
+	{% block head %}
+		
+	{% endblock head %}
+</head>
+<body>
+    <div class="main_header">
+        <div class="use_table">
+            <div class="main_header_item" align="center">
+                <a href="/">
+                    Home
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item" align="center">
+                <a href="">
+                    About
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item item_rb" align="center">
+                <a href="/">
+                    Enroll
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item item_rb float_right" align="center">
+                <a href="{% url 'login:login' %}">
+                    Login
+                    <span class="divlink"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+	{% block content %}
+		
+	{% endblock content %}
+
+	{% block footer %}
+		
+	{% endblock footer %}
+</body>
+</html>

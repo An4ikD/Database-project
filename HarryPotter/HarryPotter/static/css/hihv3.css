@@ -1,0 +1,86 @@
+body,html { padding:0px; margin:0px; font-size:14px;
+    background:url('../images/bg_girl.jpg') no-repeat top center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+a { text-decoration:none; }
+.divlink { position:absolute; width:100%; height:100%; top:0; left:0; z-index:1; background-image:url('http://sockets.hogwartsishere.com/static/clear.gif'); }
+img { border:none; }
+.strong { font-weight:bold; }
+.hidden { display:none; }
+
+.v3_header { 
+	height:50px; 
+	z-index:99; 
+	border-bottom:1px solid #DDE6F0; 
+	width:100%; 
+	top:0px; 
+	line-height:50px; 
+	position:fixed; 
+	background:#FFF; 
+	font-family:'Ubuntu',sans-serif; 
+	font-size:12px; 
+}
+
+.v3_item { 
+	position:relative; 
+	transition: background-color 0.3s ease; 
+	text-transform:uppercase; 
+	border-left:1px solid #DDE6F0; 
+	float:left; 
+	padding-left:16px; 
+	padding-right:16px; 
+}
+.v3_nb { border:none; }
+.v3_rb { border-right:1px solid #DDE6F0; }
+.v3_skinny { padding-left:0px; padding-right:0px; }
+
+.v3_item:hover { background:#0A1D3A; }
+.v3_item a { color:#0A1D3A; }
+.v3_item a:hover { color:#FFF; }
+
+.v3_slogan { line-height:normal; font-size:14px; padding-top:5px; padding-right:40px; color:#666; cursor:default; text-transform:none; font-family:'Satisfy',cursive; margin:0 auto; }
+.v3_courseBox { width:380px; border:1px solid #ccc; margin-right:15px; margin-bottom:10px; float:left; height:150px; }
+.v3_pageTitle { font-size:20px; color:#333; padding-bottom:10px; padding-top:20px; font-weight:bold; }
+#v3_signUp {  }
+.v3_signupFieldTitle { font-size:18px; padding-top:10px; font-family:'Ubuntu',sans-serif; }
+.v3_signupField input { padding:10px; font-size:12px; border-radius:5px; width:90%; border:1px solid #333; font-weight:bold; color:#333; font-family:'Ubuntu',sans-serif; }
+.v3_faq { padding-top:2px; padding-bottom:2px; }
+.v3_faq a { color:#000033; }
+.v3_faq:hover { font-weight:bold; }
+
+.float_left { float:left; }
+.float_right { float:right; }
+.use_table { display:table; width:1000px; margin:0 auto; }
+.ubuntu { font-family:'Ubuntu',sans-serif; }
+.lato { font-family:'Lato',sans-serif; }
+
+.v3_enroll { width:200px; transition: background-color 0.3s ease; margin:0 auto; background:rgba(255,255,0,.3); padding:10px; color:#FFF; position:relative; }
+.v3_enroll:hover { background:rgba(255,255,0,.6); }
+
+.v3_home_box { width:305px; height:213px; margin:0 auto; position:relative; }
+.v3_home_box:hover { font-weight:bold; }
+.v3_home_box_banner { height:65px; position:absolute; bottom:0px; left:0px; width:100%;  color:#FFF; font-size:13px; }
+
+.bg_house_S { background-color:#215329; }
+.house_color_S { color:#215329; }
+.bg_house_trans_S { background:rgba(33,83,41,.8); }
+.bg_hover_house_S { background-color:#215329; }
+.bg_hover_house_S:hover { background-color:#2C6B34; }
+.house_color_R { color:#154660; }
+.bg_house_trans_R { background:rgba(21,70,96,.5); }
+.bg_house_R { background-color:#154660; }
+.bg_hover_house_R { background-color:#154660; }
+.bg_hover_house_R:hover { background-color:#1B597A; }
+.house_color_H { color:#B08D00; }
+.bg_house_H { background-color:#B08D00; }
+.bg_house_trans_H { background:rgba(176,141,0,.5); }
+.bg_hover_house_H { background-color:#B08D00; }
+.bg_hover_house_H:hover { background-color:#806600; }
+.house_color_G { color:#660000; }
+.bg_house_trans_G { background:rgba(102,0,0,.5); }
+.bg_house_G { background-color:#660000; }
+.bg_hover_house_G { background-color:#660000; }
+.bg_hover_house_G:hover { background-color:#8A0000; }
