@@ -20,6 +20,7 @@
 	{% endblock head %}
 </head>
 <body>
+{% if not user.is_authenticated %}
     <div class="main_header">
         <div class="use_table">
             <div class="main_header_item" align="center">
@@ -35,35 +36,51 @@
                 </a>
             </div>
             <div class="main_header_item item_rb" align="center">
-                <a href="/">
+                <a href="{% url 'enroll:enroll' %}">
                     Enroll
                 <span class="divlink"></span>
                 </a>
             </div>
             <div class="main_header_item item_rb float_right" align="center">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'login:sign_out' %}">
-                            Logout
-                            <span class="divlink"></span>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'login:sign_in' %}">
-                            Login
-                            <span class="divlink"></span>
-                        </a>
-                    {% endif %}
+                <a href="{% url 'login:sign_in' %}">
+                    Login
+                    <span class="divlink"></span>
                 </a>
             </div>
-            {% if user.is_authenticated %}
-                <div class="main_header_item float_right" align="center">
-                    <a href="{% url 'my_profile:my_profile' %}">
-                        {{ user.username }}
-                        <span class="divlink"></span>
-                    </a>
-                </div>
-            {% endif %}
         </div>
     </div>
+
+{% else %}
+    <div class="main_header">
+        <div class="use_table">
+            <div class="main_header_item" align="center">
+                <a href="/">
+                    Home
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item item_rb" align="center">
+                <a href="">
+                    About
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item item_rb float_right" align="center">
+                <a href="{% url 'login:sign_out' %}">
+                    Logout
+                    <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item float_right" align="center">
+                <a href="{% url 'my_profile:my_profile' %}">
+                    {{ user.username }}
+                    <span class="divlink"></span>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+{% endif %}
     
 
 	{% block content %}

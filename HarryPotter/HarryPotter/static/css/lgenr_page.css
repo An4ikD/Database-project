@@ -1,0 +1,46 @@
+body, html {
+	padding:0px; margin:0px; font-size:14px;
+    background:url('../images/bg_hmpage.jpg') no-repeat top center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.fail_login {
+	color:red;
+}
+
+.wlc_title {
+	font-size: 23px;
+	font-weight: bold;
+}
+.wlc_enr {
+	font-size: 15px;
+	font-style: italic;
+	padding-top: 10px;
+}
+
+.wlc_login_form {
+	font-size: 17px;
+}
+
+.wlc_login_field {
+	font-size:12px; 
+	border-radius:5px; 
+	width:90%; 
+	border:1px solid #333; 
+	font-weight:bold; 
+	color:#333; 
+	font-family:'Ubuntu',sans-serif; 
+}
+
+.wlc_login_button input { 
+	padding:4px; 
+	font-size:12px; 
+	border-radius:5px; 
+	width:10%;
+	border:1px solid #333;
+	font-weight:bold;
+	color:#333; 
+	font-family:'Ubuntu',sans-serif; 
+}

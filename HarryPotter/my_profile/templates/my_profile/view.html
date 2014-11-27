@@ -2,39 +2,53 @@
 {% load staticfiles %}
 {% block title %}| My profile{% endblock title %}
 
+{% block head %}
+   <link rel="stylesheet" type="text/css" href="{% static 'css/main_header.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/gen.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/lgenr_page.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/myProfilePage.css' %}">
+{% endblock head %}
 {% block content %}
-   <div style="margin-top:100px;">
-      <table border="1" width="100%">
-         <tr>
-            <th width="10%">Name: </th>
-            <td> User's name </td>
-         </tr>
-         <tr>
-            <th>Surname: </th>
-            <td> User's surname </td>
-         </tr>
-         <tr>
-            <th>House: </th>
-            <td> User's house (griffindor, slytherin, etc)</td>
-         </tr>
-         <tr>
-            <th>Subjects: </th>
-            <td> List of user's subjects that he studies/teaches </td>
-         </tr>
+   <div class="use_table" style="margin-top:50px; padding-top:20px; padding-left:20px;">
+      <table width="100%">
+         <tbody>
+            <tr>
+               <td width="50%" valign="top">
+                  <div class="nameSurname">
+                     Name Surname
+                  </div>
+                  <br>
+                  <br>
+                  <div class="wlc_login_form">
+                     <label for="id_username">
+                        Username
+                     </label>
+                  </div>
+                  <div>
+                     {{ form.username }}
+                  </div>   
+                  <p></p>
+                  <p></p>
+
+                  <div class="wlc_login_form">
+                     <label for="id_password">
+                        Password
+                     </label>
+                  </div>
+                  <div>
+                     {{ form.password }}
+                  </div>   
+               </td>
+
+               <td width="50%" valign="top">
+                  <div class="">
+                     Name Surname
+                  </div>
+               </td>
+            </tr>
+         </tbody> 
       </table>
-   <div align="center">
-   <a href="{% url 'my_profile:edit' %}">Edit my profile</a>
-   </div>
-   <div>
-   <a href="{% url 'my_profile:search_students' %}"> Search students </a>
-   </div>
-   <div>
-   <a href="{% url 'my_profile:search_staff' %}"> Search staff </a>
-   </div>
-   <div>
-   <a href="{% url 'my_profile:search_subjects' %}"> Search subjects </a>
    </div>
 
-   </div>
 {% endblock content %}
 

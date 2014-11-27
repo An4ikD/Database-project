@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'homepage',
     'login',
+    'enroll',
     'welcome',
     'my_profile',
 )

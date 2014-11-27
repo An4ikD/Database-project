@@ -26,7 +26,7 @@ def sign_in(request, template_name, redirect_name):
 				return render(request, template_name)
 		else:
 			# the authentication system was unable to verify the username and password
-			params['error'] = "The username or password were incorrect."
+			params['error'] = "The username or password was incorrect."
 			return render(request, template_name, params)
 
 	return render(request, template_name, params)
