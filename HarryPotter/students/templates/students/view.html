@@ -1,0 +1,42 @@
+{% extends "HarryPotter/base.html" %}
+{% load staticfiles %}
+
+{% block title %} | Students{% endblock title %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main_header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gen.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lgenr_page.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+	<div class="showTable" style="margin-top:50px; padding-top:20px; padding-left:20px;">
+		<table border="1" cellspacing="0" width="25%">
+			<tbody>
+				<tr>
+					<th>#</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Surname</th>
+					{% if is_staff %}
+						<th></th>
+					{% endif %}
+				</tr>
+				{% for student in students %}
+					<tr>
+						<td>{{ forloop.counter }}</td>
+						<td>{{ student.userID }}</td>
+						<td>{{ student.name }}</td>
+						<td>{{ student.surname }}</td>
+						{% if is_staff %}
+							<td>Delete</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+
+{% endblock content %}

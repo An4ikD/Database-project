@@ -1,0 +1,32 @@
+<div class="use_table" style="margin-top:50px; padding-top:20px; padding-left:20px;">
+   <table width="100%">
+      <tbody>
+         <tr>
+            <td width="50%" valign="top">
+               <div class="nameSurname">
+                  {{ profile.name }} {{ profile.surname }}
+               </div>
+               <br>
+               <br>
+               <div class="tname">
+                  Username: 
+                  {{ user.username }}
+               </div> 
+               <p></p>
+               <p></p>
+               <div class="tname">
+                  Teaching courses: 
+                  {{ user.username }}
+               </div> 
+               <p></p>
+               <p></p>
+               <div class="wlc_login_button" style="padding-top:10px;">
+                  <a href="{% url 'my_profile:edit' %}">
+                     <input type="submit" value="Edit profile" />
+                  </a>
+               </div>
+            </td>
+         </tr>
+      </tbody> 
+   </table>
+</div>

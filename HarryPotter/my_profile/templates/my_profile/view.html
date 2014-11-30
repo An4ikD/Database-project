@@ -9,46 +9,12 @@
    <link rel="stylesheet" type="text/css" href="{% static 'css/myProfilePage.css' %}">
 {% endblock head %}
 {% block content %}
-   <div class="use_table" style="margin-top:50px; padding-top:20px; padding-left:20px;">
-      <table width="100%">
-         <tbody>
-            <tr>
-               <td width="50%" valign="top">
-                  <div class="nameSurname">
-                     Name Surname
-                  </div>
-                  <br>
-                  <br>
-                  <div class="wlc_login_form">
-                     <label for="id_username">
-                        Username
-                     </label>
-                  </div>
-                  <div>
-                     {{ form.username }}
-                  </div>   
-                  <p></p>
-                  <p></p>
 
-                  <div class="wlc_login_form">
-                     <label for="id_password">
-                        Password
-                     </label>
-                  </div>
-                  <div>
-                     {{ form.password }}
-                  </div>   
-               </td>
-
-               <td width="50%" valign="top">
-                  <div class="">
-                     Name Surname
-                  </div>
-               </td>
-            </tr>
-         </tbody> 
-      </table>
-   </div>
+	{% if is_staff %}
+   		{% include "my_profile/forms/view_form_staff.html" %}
+   	{% else %}
+   		{% include "my_profile/forms/view_form_student.html" %}
+	{% endif %}
 
 {% endblock content %}
 

@@ -40,8 +40,11 @@ INSTALLED_APPS = (
     'homepage',
     'login',
     'enroll',
-    'welcome',
     'my_profile',
+    'students',
+    'staff',
+    'courses',
+    'houses',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,6 +64,9 @@ WSGI_APPLICATION = 'HarryPotter.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+
+
+# Connecting to MySQL Database
 import mysql.connector
 
 DATABASES = {
@@ -81,6 +87,18 @@ config = {
     'database': 'anuar_dikhanov_project', 
     'raise_on_warnings': True,
 }
+
+
+# Connect to MySQL DB, in order to perform queries.
+cnx = mysql.connector.connect(
+    user='a.dikhanov',
+    password= 'I11ustrator',
+    host= '10.10.200.67',
+    database= 'anuar_dikhanov_project', 
+    raise_on_warnings= True,
+)
+cursor = cnx.cursor()
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 

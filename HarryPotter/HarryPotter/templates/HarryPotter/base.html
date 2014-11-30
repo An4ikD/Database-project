@@ -19,6 +19,7 @@
 		
 	{% endblock head %}
 </head>
+
 <body>
 {% if not user.is_authenticated %}
     <div class="main_header">
@@ -59,9 +60,33 @@
                 <span class="divlink"></span>
                 </a>
             </div>
-            <div class="main_header_item item_rb" align="center">
+            <div class="main_header_item" align="center">
                 <a href="">
                     About
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item" align="center">
+                <a href="{% url 'students:get_students' %}">
+                    Students
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item" align="center">
+                <a href="{% url 'staff:get_staff' %}">
+                    Staff
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item" align="center">
+                <a href="{% url 'courses:get_courses' %}">
+                    Courses
+                <span class="divlink"></span>
+                </a>
+            </div>
+            <div class="main_header_item item_rb" align="center">
+                <a href="{% url 'houses:get_houses' %}">
+                    Houses
                 <span class="divlink"></span>
                 </a>
             </div>

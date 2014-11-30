@@ -1,16 +1,12 @@
 {% extends "HarryPotter/base.html" %}
-{% block title %}Edit profile{% endblock %}
+{% load staticfiles %}
+
+{% block title %}| Edit profile{% endblock %}
 {% block head %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main_header.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/gen.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/lgenr_page.css' %}">
 {% endblock %}
 {% block content %}
-    <form method="post" action="." style="text-align:center;">
-    	{% csrf_token %}
-        <table border="0" align="center">
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Save" />
-    </form>
+    {% include "my_profile/forms/edit_form_staff.html" %}
 {% endblock %}

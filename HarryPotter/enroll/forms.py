@@ -9,7 +9,13 @@ class RegistrationForm(forms.Form):
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label=_("Email address"))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("Password"))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("Password (again)"))
- 
+
+    userTypeChoices = (
+            ('1', 'Staff'),
+            ('2', 'Student'),
+        )
+    userType = forms.ChoiceField(choices=userTypeChoices)
+
     def clean_username(self):
         try:
             user = User.objects.get(username__iexact=self.cleaned_data['username'])

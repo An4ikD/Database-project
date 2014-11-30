@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 
-
 def sign_in(request, template_name, redirect_name):
 	params = {}
 	params['form'] = LoginForm()
