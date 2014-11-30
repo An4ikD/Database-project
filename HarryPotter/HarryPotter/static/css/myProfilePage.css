@@ -1,9 +1,13 @@
 .nameSurname {
 	font-size: 30px;
 	font-weight: bold;
-	
 }
 
 .tname {
 	font-size: 18px;
+}
+
+.tvalue {
+	font-style: italic;
+	font-family: Times New Roman;
 }

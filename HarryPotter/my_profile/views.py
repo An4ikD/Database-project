@@ -39,17 +39,17 @@ def get_profile(type, userID):
                 'surname': surname
             }
     else:
-        query = ("SELECT name, surname FROM student "
+        query = ("SELECT name, surname, houseName FROM student "
             "WHERE student.userID like %s" % userID)
         
         cursor.execute(query)
 
-        for name, surname in cursor:
+        for name, surname, houseName in cursor:
             form = {
                 'name': name,
-                'surname': surname
+                'surname': surname,
+                'house': houseName
             }
-        
     return form
 
 @login_required
@@ -63,19 +63,34 @@ def my_profile(request, template_name):
         params['is_staff'] = True
         params['profile'] = get_profile(userType, request.user.id)
 
+        query = ("SELECT subject.name FROM subject "
+            "WHERE subject.teacherID like %s " % (request.user.id))
+        cursor.execute(query)
+
+        temp = []
+        for course in cursor:
+            courseName = ""
+            for i in course:
+                if i not in trash:
+                    courseName += i
+
+            temp.append({'course':courseName})
+
+        params['courses'] = temp
+
     else:
         params['is_staff'] = False
         params['profile'] = get_profile(userType, request.user.id)
 
-        query = ("SELECT subject.name sub FROM subject, study "
+        query = ("SELECT subject.name FROM subject, study "
             "WHERE study.studentID like %s "
             "and study.subjectID like subject.ID" % (request.user.id))
         cursor.execute(query)
 
         temp = []
-        for crs in cursor:
+        for course in cursor:
             courseName = ""
-            for i in crs:
+            for i in course:
                 if i not in trash:
                     courseName += i
 
@@ -88,23 +103,24 @@ def my_profile(request, template_name):
 
 def edit(request, template_name, redirect_name):
     userID = request.user.id
-
     userType = get_userType(userID)
 
     params = {}
-
+    if userType == 1:
+        params['is_staff'] = True
+    else:
+        params['is_staff'] = False
     if request.method == 'POST':
         if userType == 1:
             form = editStaffForm(request.POST)
             name = '"' + str(request.POST.get('name')) + '"'
             surname = '"' + str(request.POST.get('surname')) + '"'
-            print name, surname
 
             if form.is_valid():
                 update_staff = ("UPDATE staff "
                    "SET name=%s, surname=%s "
                    "where staff.userID like %s" % (name, surname, userID))
-                print update_staff
+                
                 cursor.execute(update_staff)
                 cnx.commit()
                 return redirect(redirect_name)
@@ -112,13 +128,13 @@ def edit(request, template_name, redirect_name):
             form = editStudentForm(request.POST)
             name = '"' + str(request.POST.get('name')) + '"'
             surname = '"' + str(request.POST.get('surname')) + '"'
-            print name, surname
+            houseName = '"' + str(request.POST.get('houseName')) + '"'
 
             if form.is_valid():
                 update_student = ("UPDATE student "
-                   "SET name=%s, surname=%s "
-                   "where student.userID like %s" % (name, surname, userID))
-                print update_student
+                   "SET name=%s, surname=%s, houseName=%s"
+                   "where student.userID like %s" % (name, surname, houseName, userID))
+                
                 cursor.execute(update_student)
                 cnx.commit()
                 return redirect(redirect_name)

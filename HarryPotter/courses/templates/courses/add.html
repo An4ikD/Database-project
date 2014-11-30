@@ -1,0 +1,71 @@
+{% extends "HarryPotter/base.html" %}
+{% load staticfiles %}
+
+{% block title %}| Add Course{% endblock %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main_header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gen.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lgenr_page.css' %}">
+{% endblock %}
+{% block content %}
+	<div class="use_table" style="margin-top:50px; padding-top:20px; padding-left:20px;">
+   <form method="post" action="{% url 'courses:add_course' %}">
+      <div class="wlc_title">
+         Add Course
+      </div>
+      <br><br>
+      {% csrf_token %}
+      <div class="wlc_login_form">
+         <label for="id_name">
+            Name
+         </label>
+      </div>
+      <div>
+         {{ form.name }}
+      </div>   
+      <p></p>
+      <p></p>
+
+      <div class="wlc_login_form">
+         <label for="id_room">
+            Room
+         </label>
+      </div>
+      <div>
+         {{ form.room }}
+      </div>
+      <p></p>
+      <p></p>
+
+      <div class="wlc_login_form">
+         <label for="id_description">
+            Description
+         </label>
+      </div>
+      <div>
+         {{ form.description }}
+      </div>
+      <p></p>
+      <p></p>
+
+      <div class="wlc_login_form">
+         <label for="id_timetable">
+            Timetable
+         </label>
+      </div>
+      <div>
+         {{ form.timetable }}
+      </div>
+      
+      {% if error %}
+         <div class="fail_login">
+            {{ error }}
+         </div>
+      {% endif %}
+      <div class="wlc_login_button" style="padding-top:10px;">
+         <input type="submit" value="Save" />
+      </div>
+   </form>
+</div>
+
+{% endblock %}

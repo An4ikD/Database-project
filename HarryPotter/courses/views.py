@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from my_profile.views import *
 from HarryPotter.settings import cnx, cursor
 from django.http import HttpResponse
+from courses.forms import *
 
+trash = "(),"
 # void or int function in C++
 def get_courses(request, template_name):
 	params = {}
@@ -25,22 +27,24 @@ def get_courses(request, template_name):
 		t = {}
 		t['ID'] = ID
 		t['name'] = name
+		temp.append(t)
 
+	for i in temp:
+		ID = i['ID']
 		if userType == 2:
 			query = ("SELECT subjectID, studentID FROM study "
 					"WHERE subjectID like %s "
 					"and studentID like %s" % (ID, userID))
-			print query
-			cursor.execute(query)
 
-			for subjectID, studentID in cursor:
+			tmpCursor = cnx.cursor()
+			tmpCursor.execute(query)
+
+			for subjectID, studentID in tmpCursor:
 				if subjectID == None:
-					t['status'] = False
+					i['status'] = False
 				else:
-					t['status'] = True
-
-		temp.append(t)
-
+					i['status'] = True
+					
 	params['courses'] = temp
 
 	return render(request, template_name, params)
@@ -77,5 +81,136 @@ def drop_course(request, id, template_name):
 	print query
 
 	params['message'] = "You have successfully dropped this course"
+
+	return render(request, template_name, params)
+
+def add_course(request, template_name, redirect_name):
+	params = {}
+
+	if request.method == 'POST':
+		form = courseForm(request.POST)
+
+		if form.is_valid():
+			name = '"' + request.POST.get('name') + '"'
+			room = request.POST.get('room')
+			description = request.POST.get('description')
+			timetable = request.POST.get('timetable')
+
+			query = ("SELECT max(ID) from subject")
+			cursor.execute(query)
+
+			id = 0
+			for ID in cursor:
+				for i in ID:
+					id = i + 1
+			
+			cnx.commit()
+			query = ("INSERT INTO subject "
+					"(ID, name) "
+					"VALUES (%s, %s)" % (id, name))
+			cursor.execute(query)
+			cnx.commit()
+
+			if room != None:
+				query = ("UPDATE subject "
+						"set room=%s " 
+						"WHERE name like %s" % (room, name))
+				cursor.execute(query)
+				cnx.commit()
+			if description != '':
+				query = ("UPDATE subject "
+						"set desciption=%s " 
+						"WHERE name like %s" % ('"' + description + '"', name))
+				cursor.execute(query)
+				cnx.commit()
+			if timetable != '':
+				query = ("UPDATE subject "
+						"set timetable=%s " 
+						"WHERE name like %s" % ('"' + timetable + '"', name))
+				cursor.execute(query)
+				cnx.commit()
+
+			return redirect(redirect_name)
+
+	form = courseForm()
+	params['form'] = form
+	return render(request, template_name, params)
+
+def teach_course(request, id, template_name):
+	params = {}
+	
+	userID = request.user.id
+
+	query = ("UPDATE subject "
+            "set teacherID=%s "
+            "WHERE ID=%s" % (userID, id))
+	cursor.execute(query)
+	cnx.commit()
+
+	params['message'] = "You have successfully registered for teaching this course!"
+
+	return render(request, template_name, params)
+
+
+def edit_course(request, id, template_name, redirect_name):
+	params = {}
+
+	if request.method == 'POST':
+		form = courseForm(request.POST)
+
+		if form.is_valid():
+			name = '"' + request.POST.get('name') + '"'
+			room = request.POST.get('room')
+			description = request.POST.get('description')
+			timetable = request.POST.get('timetable')
+
+			query = ("UPDATE subject "
+					"set name=%s " 
+					"WHERE ID like %s" % (name, id))
+			cursor.execute(query)
+			cnx.commit()
+
+			if room != None:
+				query = ("UPDATE subject "
+						"set room=%s "
+						"WHERE ID like %s" % (room, id))
+				cursor.execute(query)
+				cnx.commit()
+			if description != '':
+				query = ("UPDATE subject "
+						"set desciption=%s "
+						"WHERE ID like %s" % ('"' + description + '"', id))
+				cursor.execute(query)
+				cnx.commit()
+			if timetable != '':
+				query = ("UPDATE subject "
+						"set timetable=%s "
+						"WHERE ID like %s" % ('"' + timetable + '"', id))
+				cursor.execute(query)
+				cnx.commit()
+
+			return redirect(redirect_name)
+
+	form = courseForm()
+	params['form'] = form
+	params['id'] = id
+	return render(request, template_name, params)
+
+def delete_course(request, id, template_name):
+	params = {}
+	
+	userID = request.user.id
+
+	query = ("DELETE FROM study "
+			"where subjectID like %s" % (id))
+	cursor.execute(query)
+	cnx.commit()
+
+	query = ("DELETE FROM subject "
+            "where ID like %s" % (id))
+	cursor.execute(query)
+	cnx.commit()
+
+	params['message'] = "You have successfully deleted this course!"
 
 	return render(request, template_name, params)

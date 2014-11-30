@@ -1,0 +1,49 @@
+<div class="use_table" style="margin-top:50px; padding-top:20px; padding-left:20px;">
+   <form method="post" action="{% url 'my_profile:edit' %}">
+      <div class="wlc_title">
+         Edit profile
+      </div>
+      <br><br>
+      {% csrf_token %}
+      <div class="wlc_login_form">
+         <label for="id_name">
+            Name
+         </label>
+      </div>
+      <div>
+         {{ form.name }}
+      </div>   
+      <p></p>
+      <p></p>
+
+      <div class="wlc_login_form">
+         <label for="id_surname">
+            Surname
+         </label>
+      </div>
+      <div>
+         {{ form.surname }}
+      </div>
+      <p></p>
+      <p></p>
+
+      <div class="wlc_login_form">
+         <label for="id_house">
+            House
+         </label>
+      </div>
+      <div>
+         {{ form.houseName }}
+      </div>
+      
+      {% if error %}
+         <div class="fail_login">
+            {{ error }}
+         </div>
+      {% endif %}
+      <div class="wlc_login_button" style="padding-top:10px;">
+         <input type="submit" value="Save" />
+         <input type="hidden" name="next" value="/my_profile" />
+      </div>
+   </form>
+</div>

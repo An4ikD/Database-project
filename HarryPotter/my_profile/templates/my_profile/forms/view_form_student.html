@@ -1,34 +1,47 @@
 <div class="use_table" style="margin-top:50px; padding-top:20px; padding-left:20px;">
-   <table width="100%">
+   <table width="60%">
       <tbody>
          <tr>
-            <td width="50%" valign="top">
+            <td valign="top">
                <div class="nameSurname">
                   {{ profile.name }} {{ profile.surname }}
                </div>
                <br>
                <br>
                <div class="tname">
-                  Username: 
-                  {{ user.username }}
+                  Username
+                  <div class="tvalue">
+                     {{ user.username }}
+                  </div>
                </div> 
                <p></p>
                <p></p>
                <div class="tname">
-                  Courses: 
-                  {% for course in courses %}
-                     {{ course.course }}
-                  {% endfor %}
+                  House
+                  <div class="tvalue">
+                     {{ profile.house }}
+                  </div>
                </div> 
                <p></p>
                <p></p>
-               <div class="wlc_login_button" style="padding-top:10px;">
-                  <a href="{% url 'my_profile:edit' %}">
-                     <input type="submit" value="Edit profile" />
-                  </a>
-               </div>
+               <div class="tname">
+                  Courses 
+                  <div class="tvalue">
+                     {% for course in courses %}
+                        {{ course.course }},
+                     {% endfor %}
+                  </div>
+               </div> 
+               <p></p>
+               <p></p>
+               
             </td>
          </tr>
       </tbody> 
    </table>
+</div>
+<div class="wlc_login_button" style="padding-top:10px;padding-left:70px;">
+   <a href="{% url 'my_profile:edit' %}">
+      <input type="submit" value="Edit profile" />
+   </a>
 </div>
