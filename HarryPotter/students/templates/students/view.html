@@ -13,14 +13,78 @@
 	<div class="use_table wlc_title" style="margin-top:50px; padding-top:20px; padding-left:20px;">
 		Students
 	</div>
+
+	<div class="use_table" style="padding-top:20px;padding-left:50px;">
+		<form method="post" action="{% url 'students:get_students' %}">
+		      {% csrf_token %}
+		      <table>
+		      <tr>
+			      <div class="wlc_login_form">
+			      	<td>
+			         <label for="id_ID">
+			            ID: 
+			         </label>
+			      	</td>
+			      	<td>
+			         {{ searchForm.id }}
+			      	</td>
+			      </div>   
+		      </tr>
+		      <tr>
+			      <div class="wlc_login_form">
+			      	<td>
+			         <label for="id_name">
+			            Name: 
+			         </label>
+			      	</td>
+			      	<td>
+			         {{ searchForm.name }}
+			      	</td>
+			      </div>
+		      </tr>
+
+		      <tr>
+		      <div class="wlc_login_form">
+		      	<td>
+		         <label for="id_surname">
+		            Surname: 
+		         </label>
+		      	</td>
+		      	<td>
+		         {{ searchForm.surname }}
+		      	</td>
+		      </div>
+		      </tr>
+
+		      <tr>
+		      <div class="wlc_login_form">
+		      	<td>
+		         <label for="id_houseName">
+		            House: 
+		         </label>
+		      	</td>
+		      	<td>
+		         {{ searchForm.houseName }}
+		      	</td>
+		      </div>
+		      </tr>
+
+		      </table>
+		      <div class="wlc_login_button" style="padding-top:10px;">
+		         <input type="submit" value="Search" />
+		      </div>
+		</form>
+	</div>
+
 	<div class="showTable links" style="padding-top:20px;">
-		<table border="1" cellspacing="0" width="60%">
+		<table border="1" cellspacing="0" width="70%">
 			<tbody>
 				<tr>
 					<th>#</th>
 					<th>ID</th>
 					<th>Name</th>
 					<th>Surname</th>
+					<th>House</th>
 					{% if is_staff %}
 						<th>Action</th>
 					{% endif %}
@@ -31,6 +95,7 @@
 						<td>{{ student.userID }}</td>
 						<td>{{ student.name }}</td>
 						<td>{{ student.surname }}</td>
+						<td>{{ student.houseName }}</td>
 						{% if is_staff %}
 						<td>
 							<a href="{% url 'students:dismiss_student' student.userID %}">

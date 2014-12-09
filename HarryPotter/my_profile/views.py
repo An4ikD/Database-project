@@ -148,17 +148,6 @@ def edit(request, template_name, redirect_name):
 
     return render(request, template_name, params)
 
-
-
-def search_students(request, template_name):
-    return render(request, template_name)
-
-def search_staff(request, template_name):
-    return render(request, template_name)
-
-def search_subjects(request, template_name):
-    return render(request, template_name)
-
 def logout_page(request, redirect_name):
     logout(request)
     return redirect(redirect_name)

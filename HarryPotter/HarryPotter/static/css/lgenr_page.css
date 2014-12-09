@@ -21,12 +21,12 @@ body, html {
 }
 
 .links a:link {
-    color: #D9CEED;
+    color: red;
 }
 
 /* visited link */
 .links a:visited {
-    color: #D9CEED;
+    color: red;
 }
 
 /* mouse over link */

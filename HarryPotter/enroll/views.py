@@ -54,8 +54,7 @@ def enroll(request, template_name, redirect_name):
                 data_to_type = (
                     id, username, password
                 )
-            print insert_to_type
-            print data_to_type
+
             cursor.execute(insert_to_type, data_to_type)
             cnx.commit()
 

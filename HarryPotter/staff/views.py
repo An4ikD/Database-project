@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from my_profile.views import *
 from HarryPotter.settings import cnx, cursor
+from staff.forms import *
 
 def get_staff(request, template_name):
 	params = {}
@@ -14,7 +15,38 @@ def get_staff(request, template_name):
 		params['is_staff'] = False
 	params['profile'] = get_profile(userType, userID)
 
-	query = ("SELECT userID, name, surname FROM staff ")
+	searchquery = ""
+
+	if request.method == 'POST':
+		searchForm = searchStudentForm(request.POST)
+		if searchForm.is_valid:
+			id = request.POST.get('id')
+			name = request.POST.get('name')
+			surname = request.POST.get('surname')
+
+			if id == "" and name == "" and surname == "":
+				pass
+			else:
+				searchquery += "WHERE "
+				put = False
+
+				if id != "":
+					searchquery += "userID like %s " % (id)
+					put = True
+				if name != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "name like %s " % ('"' + name + '"')
+					put = True
+				if surname != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "surname like %s " % ('"' + surname + '"')
+					put = True
+	
+	params['searchForm'] = searchStudentForm()
+
+	query = ("SELECT userID, name, surname FROM staff ") + searchquery
 
 	cursor.execute(query)
 
@@ -39,7 +71,7 @@ def dismiss_staff(request, id, template_name):
 	query = ("UPDATE subject "
 			"set teacherID=NULL "
 			"where teacherID like %s" % (id))
-	print query
+	
 	cursor.execute(query)
 	cnx.commit()
 

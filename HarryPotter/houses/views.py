@@ -15,16 +15,54 @@ def get_houses(request, template_name):
 		params['is_staff'] = False
 	params['profile'] = get_profile(userType, userID)
 
-	query = ("SELECT name, symbol, place FROM house ")
+	searchquery = ""
+
+	if request.method == 'POST':
+		searchForm = searchHouseForm(request.POST)
+		if searchForm.is_valid:
+			name = request.POST.get('name')
+			symbol = request.POST.get('symbol')
+			place = request.POST.get('place')
+			traits = request.POST.get('traits')
+
+			if place == "" and name == "" and symbol == "" and traits == "":
+				pass
+			else:
+				searchquery += "WHERE "
+				put = False
+
+				if place != "":
+					searchquery += "place like %s " % ('"' + place + '"')
+					put = True
+				if name != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "name like %s " % ('"' + name + '"')
+					put = True
+				if symbol != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "symbol like %s " % ('"' + symbol + '"')
+					put = True
+				if traits != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "traits like %s " % ('"' + traits + '"')
+					put = True
+	
+	params['searchForm'] = searchHouseForm()
+
+	query = ("SELECT name, symbol, place, traits FROM house ") + searchquery
 
 	cursor.execute(query)
 
 	temp = []
-	for name, symbol, place in cursor:
+	for name, symbol, place, traits in cursor:
 		t = {}
 		t['name'] = name
 		t['symbol'] = symbol
 		t['place'] = place
+		t['traits'] = traits
 		temp.append(t)
 
 	params['houses'] = temp
@@ -88,9 +126,8 @@ def edit_house(request, houseName, template_name, redirect_name):
 			traits = request.POST.get('traits')
 
 			query = ("UPDATE student "
-					"set houseName=%s "
-					"WHERE houseName=%s" % ('"' + houseName + '"', name))
-			print query
+					"set houseName=NULL "
+					"WHERE houseName=%s" % (name))
 			cursor.execute(query)
 			cnx.commit()
 
@@ -134,7 +171,6 @@ def delete_house(request, houseName, template_name):
 	query = ("UPDATE student "
 			"set houseName=NULL "
 			"where houseName like %s" % ('"' + houseName + '"'))
-	print query
 	cursor.execute(query)
 	cnx.commit()
 

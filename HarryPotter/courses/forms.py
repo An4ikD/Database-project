@@ -9,3 +9,8 @@ class courseForm(forms.Form):
     room = forms.IntegerField()
     description = forms.CharField()
     timetable = forms.CharField()
+
+class searchCourseForm(forms.Form):
+	id = forms.IntegerField()
+	name = forms.CharField()
+	room = forms.IntegerField()

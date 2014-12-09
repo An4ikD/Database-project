@@ -9,3 +9,9 @@ class courseForm(forms.Form):
     symbol = forms.CharField()
     place = forms.CharField()
     traits = forms.CharField()
+
+class searchHouseForm(forms.Form):
+	name = forms.CharField()
+	symbol = forms.CharField()
+	place = forms.CharField()
+	traits = forms.CharField()

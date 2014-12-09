@@ -18,15 +18,49 @@ def get_courses(request, template_name):
 	else:
 		params['is_staff'] = False
 
-	query = ("SELECT ID, name FROM subject ")
+	searchquery = ""
 
+	if request.method == 'POST':
+		searchForm = searchCourseForm(request.POST)
+		if searchForm.is_valid:
+			id = request.POST.get('id')
+			name = request.POST.get('name')
+			room = request.POST.get('room')
+			
+			if id == "" and name == "" and room == "":
+				pass
+			else:
+				searchquery += "WHERE "
+				put = False
+
+				if id != "":
+					searchquery += "ID like %s " % (id)
+					put = True
+				if name != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "name like %s " % ('"' + name + '"')
+					put = True
+				if room != "":
+					if put:
+						searchquery += "AND "
+					searchquery += "room like %s " % (room)
+	
+	params['searchForm'] = searchCourseForm()
+
+
+	query = ("SELECT ID, name, room, timetable, desciption FROM subject ") + searchquery
+	print query
 	cursor.execute(query)
 
 	temp = []
-	for ID, name in cursor:
+	for ID, name, room, timetable, desciption in cursor:
 		t = {}
 		t['ID'] = ID
 		t['name'] = name
+		t['room'] = room
+		t['timetable'] = timetable
+		t['description'] = desciption
 		temp.append(t)
 
 	for i in temp:
@@ -111,7 +145,7 @@ def add_course(request, template_name, redirect_name):
 			cursor.execute(query)
 			cnx.commit()
 
-			if room != None:
+			if room != "":
 				query = ("UPDATE subject "
 						"set room=%s " 
 						"WHERE name like %s" % (room, name))
@@ -170,7 +204,7 @@ def edit_course(request, id, template_name, redirect_name):
 			cursor.execute(query)
 			cnx.commit()
 
-			if room != None:
+			if room != '':
 				query = ("UPDATE subject "
 						"set room=%s "
 						"WHERE ID like %s" % (room, id))
